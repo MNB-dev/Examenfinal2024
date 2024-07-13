@@ -35,12 +35,10 @@ public class Main {
 
     /**
      * Ejercicio 2 B
-     *
-     * No llego a terminarlo pero la idea del ejercicio es ir agregando una valor a la cola con prioridad
-     * En caso de que el candidato ya esté, editar el valor por la cantidad de apariciones con un contador
+     * Complejidad: O(n log n)
      */
     public static void Ejercicio2B() {
-        int[] elementos = new int[]{3, 1, 3, 2, 1};
+        int[] elementos = new int[]{3, 1, 3, 2, 1, 2, 5, 2, 2, 5};
         IStack stack = new Stack();
         for (int i = 0; i < elementos.length; i++) {
             stack.add(elementos[i]);
@@ -55,19 +53,20 @@ public class Main {
         }
 
         IPriorityQueue res = new PriorityQueueOriginal();
-        IPriorityQueue copy = PriorityQueueUtils.copyPriorityQueue(pq);
 
-        while(!pq.isEmpty()) {
-            int p = pq.getPriority();
-            int val = PriorityQueueUtils.counter(copy, p);
+        while (!pq.isEmpty()) {
+            int currentPriority = pq.getPriority();
+            int count = 0;
 
-            if(!PriorityQueueUtils.checkIfexists(res, p)) {
-                res.add(val, p);
+            while (!pq.isEmpty() && pq.getPriority() == currentPriority) {
+                pq.remove();
+                count++;
             }
-            pq.remove();
+
+            res.add(count, currentPriority);
         }
 
-        System.out.printf("Valor impar: " +  PriorityQueueUtils.getImpar(res));
+        System.out.printf("Valor impar: " + PriorityQueueUtils.getImpar(res));
     }
 
     /**

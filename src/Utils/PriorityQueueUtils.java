@@ -104,17 +104,16 @@ public class PriorityQueueUtils {
     public static int getImpar(IPriorityQueue queue) {
         IPriorityQueue copy = copyPriorityQueue(queue);
 
-        while(!copy.isEmpty()) {
+        while (!copy.isEmpty()) {
             int value = copy.getFirst();
 
-            if(value%2!=0) {
+            if (value % 2 != 0) {
                 return copy.getPriority();
             }
             copy.remove();
         }
 
         return -1;
-
     }
 
 }
